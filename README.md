@@ -12,4 +12,4 @@ This my personal project called parcel management that I made for my dad
   - Add and Remove some parcel.
   - Increase and Decrease the amount of each parcel.
   - Can Export to Excel file as a report.
-  - I forgot because I wrtie this readme in 2021 that my is created in 2019.
+  - I forgot because I wrote this readme in 2021 that my is created in 2019.
