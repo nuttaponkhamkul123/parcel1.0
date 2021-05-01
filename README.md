@@ -7,6 +7,7 @@ This my personal project called parcel management that I made for my dad
   - I want to make some useful project for someone.
   - I want to improve my java skill using any api or gui layout.
   - I want to learning about any new things that I want to learn.
+ 
  Feature
   - Add and Remove some parcel.
   - Increase and Decrease the amount of each parcel.
