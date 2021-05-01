@@ -170,6 +170,7 @@ public class ExcelOperator {
         } else {
           file = file1;
         } 
+        //file extension bug
         FileOutputStream fileOut = new FileOutputStream(new File(fileName) + "");
         workbook.write(fileOut);
         fileOut.close();
