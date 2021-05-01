@@ -162,7 +162,7 @@ public class ExcelOperator {
     chooser.setFileFilter(filter);
     if (chooser.showSaveDialog(null) == 0)
       try {
-        File file = null;
+        File file;
         file1 = chooser.getSelectedFile();
         String fileName = "";
         if (!file1.getAbsolutePath().endsWith(".xlsx")) {
@@ -170,7 +170,7 @@ public class ExcelOperator {
         } else {
           file = file1;
         } 
-        FileOutputStream fileOut = new FileOutputStream(file + "");
+        FileOutputStream fileOut = new FileOutputStream(new File(fileName) + "");
         workbook.write(fileOut);
         fileOut.close();
         workbook.close();
