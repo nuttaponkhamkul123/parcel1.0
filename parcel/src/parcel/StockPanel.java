@@ -24,12 +24,15 @@ import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
+
 import net.miginfocom.swing.MigLayout;
 
 public class StockPanel extends JFrame {
   private static final long serialVersionUID = 1400543192516649977L;
   
   JTable table;
+  
   
   public static String[] selectedParcel = new String[2];
   
@@ -57,6 +60,7 @@ public class StockPanel extends JFrame {
           return false;
         }
       };
+    
     this.model.addColumn("รหัสพัสดุ");
     this.model.addColumn("ชื่อพัสดุ");
     this.model.addColumn("คงเหลือ");
@@ -157,6 +161,9 @@ public class StockPanel extends JFrame {
           }
         });
     this.table = new JTable(this.model);
+    JTableHeader header = this.table.getTableHeader();
+    header.setFont(new Font("Angsana New", 0, 20));
+    this.table.setFont(new Font("Angsana New", 0, 20));
     this.table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
           public void valueChanged(ListSelectionEvent arg0) {
             StockPanel.this.selectBtn.setEnabled(true);
@@ -217,6 +224,7 @@ public class StockPanel extends JFrame {
           
           public void windowActivated(WindowEvent arg0) {}
         });
+   
     setResizable(true);
     setEnabled(true);
     setVisible(true);
