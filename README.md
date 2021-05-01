@@ -13,3 +13,8 @@ This my personal project called parcel management that I made for my dad
   - Increase and Decrease the amount of each parcel.
   - Can Export to Excel file as a report.
   - I forgot because I wrote this readme in 2021 that my is created in 2019.
+
+# Requirements
+ - Java SE 15
+ - Any server emulator that supported mysql and phpmyadmin(optional)
+ - Any Java IDE (I prefer use Eclipse)
