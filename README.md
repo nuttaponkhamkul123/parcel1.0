@@ -1,4 +1,4 @@
-# Parcel 1.0
+# Parcel 1.1
 This my personal project called parcel management that I made for my dad
 
 # Introduction 
@@ -16,5 +16,5 @@ This my personal project called parcel management that I made for my dad
 
 # Requirements
  - Java SE 15
- - Any server emulator that supported mysql and phpmyadmin(optional)
+ - (Removed) Any server emulator that supported mysql and phpmyadmin(optional)
  - Any Java IDE (I prefer use Eclipse)
