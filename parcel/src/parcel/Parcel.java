@@ -1,10 +1,11 @@
 package parcel;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 
-public class Parcel {
+public class Parcel implements Serializable{
   private String name;
-  
+  private static final long serialVersionUID = 1L;
   private String id;
   
   private String publicName;

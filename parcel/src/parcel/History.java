@@ -1,8 +1,10 @@
 package parcel;
 
-public class History {
+import java.io.Serializable;
+
+public class History implements Serializable{
 	  private String itemID;
-	  
+	  private static final long serialVersionUID = 1L;
 	  private String date;
 	  
 	  private String document;

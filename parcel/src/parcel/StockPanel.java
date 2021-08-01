@@ -40,6 +40,8 @@ public class StockPanel extends JFrame {
   
   private Connector c;
   
+  private ParcelOperator po;
+  
   public static boolean isOpened = false;
   
   private DefaultTableModel model;
@@ -48,8 +50,8 @@ public class StockPanel extends JFrame {
   
   public StockPanel() {
     UIManager.put("OptionPane.messageFont", new Font("Angsana New", 0, 20));
-    this.c = new Connector();
-    this.parcels = this.c.getItems();
+    this.po = new ParcelOperator();
+    this.parcels = po.getItems();
     setLayout(new BorderLayout(20, 10));
     JLabel l1 = new JLabel("");
     l1.setBorder(BorderFactory.createEmptyBorder(15, 40, 0, 20));
@@ -114,7 +116,7 @@ public class StockPanel extends JFrame {
               JTextField f = arrayOfJTextField1[b];
               f.setFont(new Font("Angsana New", 1, 25));
               f.setPreferredSize(new Dimension(180, 25));
-              DefaultContextMenu.addDefaultContextMenu(f);
+              
               b++;
             } 
             JLabel[] arrayOfJLabel1;
@@ -141,13 +143,17 @@ public class StockPanel extends JFrame {
                       String toSendPItemName = textField[2].getText();
                       int toSendQuantity = Integer.parseInt(textField[3].getText());
                       String toSendMeasure = textField[4].getText();
-                      String command = "INSERT INTO `items`(`itemID`, `itemName`, `itemPName`, `quantity`,`measure`) VALUES ('" + toSendID + "','" + toSendItemName + "','" + toSendPItemName + "'," + toSendQuantity + ",'" + toSendMeasure + "')";
-                      if (c.execute(command)) {
+                      ///insert stock?
+                      //String command = "INSERT INTO `items`(`itemID`, `itemName`, `itemPName`, `quantity`,`measure`) VALUES ('" + toSendID + "','" + toSendItemName + "','" + toSendPItemName + "'," + toSendQuantity + ",'" + toSendMeasure + "')";
+                      
                         String[] object = { toSendID, toSendItemName, (new StringBuilder(String.valueOf(toSendQuantity))).toString() };
                         parcels.add(new Parcel(toSendItemName, toSendID, toSendPItemName, toSendQuantity, toSendMeasure));
+                        po.setItems(parcels);
+                        po.saveParcel();
+                 
                         model.addRow((Object[])object);
                         dialog.dispose();
-                      } 
+                      
                     } catch (NumberFormatException e1) {
                       JOptionPane.showMessageDialog(null, "จำนวนไม่ใช่ตัวเลข กรุณากรอกใหม่");
                     } 
@@ -179,7 +185,9 @@ public class StockPanel extends JFrame {
             int isConfirm = JOptionPane.showConfirmDialog(null, "ID : " + StockPanel.selectedParcel[1] + "\n: " + StockPanel.selectedParcel[0] + "?");
             System.out.println("Deleting ID : " + StockPanel.selectedParcel[1] + "\nSelected Name : " + StockPanel.selectedParcel[0]);
             if (isConfirm == 0) {
-              StockPanel.this.c.removeParcel(StockPanel.selectedParcel[0]);
+//              StockPanel.this.c.removeParcel(StockPanel.selectedParcel[0]);
+            	po.getItems().remove(parcels.indexOf(StockPanel.selectedParcel[0]));
+            	
               for (Parcel c : StockPanel.this.parcels) {
                 if (selectedID == c.getId() && selectedName == c.getName()) {
                   StockPanel.this.parcels.remove(c);
@@ -216,7 +224,7 @@ public class StockPanel extends JFrame {
           public void windowDeactivated(WindowEvent arg0) {}
           
           public void windowClosing(WindowEvent arg0) {
-            StockPanel.this.c.close();
+           
             System.out.println("Exiting");
           }
           
@@ -234,14 +242,14 @@ public class StockPanel extends JFrame {
   }
   
   private ArrayList<Parcel> loadItems() {
-    return this.c.getItems();
+    return po.getItems();
   }
   
   private void callNextFrame(String name, String id) {
     for (Parcel p : this.parcels) {
       if (name == p.getName() && id == p.getId()) {
         isOpened = true;
-        DetailPanel panel = new DetailPanel(p, this.c);
+        DetailPanel panel = new DetailPanel(p);
         panel.addWindowListener(new WindowListener() {
               public void windowOpened(WindowEvent e) {}
               

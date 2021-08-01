@@ -49,6 +49,8 @@ public class DetailPanel extends JFrame {
   
   private Connector c;
   
+  private StockOperator so; 
+  
   private History temp_his;
   
   private int temp_quantity = 0;
@@ -57,13 +59,14 @@ public class DetailPanel extends JFrame {
   
   private final Font ANGSANA25_BOLD = new Font("Angsana New", 1, 25);
   
-  public DetailPanel(Parcel parcel, Connector c) {
+  
+  public DetailPanel(Parcel parcel) {
     UIManager.put("OptionPane.messageFont", new Font("Angsana New", 0, 20));
-    this.c = c;
+    so = new StockOperator();
     this.tfPanel = new JPanel();
     this.tbPanel = new JPanel();
-    c.fetchHistory(parcel.getId());
-    this.history = c.getHistory();
+    so.fetchHistory(parcel.getId());
+    this.history = so.getHistory();
     renderItemUi(parcel);
     if (!this.isFound)
       JOptionPane.showMessageDialog(null, "Not Found"); 
@@ -108,7 +111,7 @@ public class DetailPanel extends JFrame {
     for (j = (arrayOfJTextField1 = fields).length, b = 0; b < j; ) {
       JTextField f = arrayOfJTextField1[b];
       f.setFont(this.ANGSANA25);
-      DefaultContextMenu.addDefaultContextMenu(f);
+      
       b++;
     } 
     fields[0].setText(i.getId());
@@ -179,9 +182,9 @@ public class DetailPanel extends JFrame {
             if (choice == 0) {
               Object selectedID = DetailPanel.this.table.getModel().getValueAt(DetailPanel.this.table.getSelectedRow(), 8);
               System.out.println(DetailPanel.this.table.getModel().getValueAt(DetailPanel.this.table.getSelectedRow(), 8));
-              DetailPanel.this.c.removeHistory((Long)selectedID);
-              DetailPanel.this.c.fetchHistory(DetailPanel.this.selectedParcel.getId());
-              DetailPanel.this.history = DetailPanel.this.c.getHistory();
+              DetailPanel.this.so.removeHistory((Long)selectedID);
+              DetailPanel.this.so.fetchHistory(DetailPanel.this.selectedParcel.getId());
+              DetailPanel.this.history = DetailPanel.this.so.getHistory();
               DetailPanel.this.putItemInTable();
             } 
           }
@@ -214,11 +217,11 @@ public class DetailPanel extends JFrame {
             JLabel maxLabel = new JLabel("จำนวนที่มี");
             JLabel currentLabel = new JLabel("จำนวน");
             final JTextField maximumQuantity = new JTextField();
-            DefaultContextMenu.addDefaultContextMenu(maximumQuantity);
+           
             maximumQuantity.setText((new StringBuilder(String.valueOf(i.getQuantity()))).toString());
             maximumQuantity.setEditable(false);
             final JTextField currentQuantity = new JTextField();
-            DefaultContextMenu.addDefaultContextMenu(currentQuantity);
+            
             JLabel noteLabel = new JLabel("หมายเหตุ");
             noteLabel.setFont(new Font("Angsana New", 1, 18));
             final JTextArea note = new JTextArea();
@@ -227,15 +230,15 @@ public class DetailPanel extends JFrame {
             note.setPreferredSize(new Dimension(250, 100));
             JLabel spinnerLabel = new JLabel("วัน/เดือน/ปี");
             final JTextField timeSpinner = new JTextField();
-            DefaultContextMenu.addDefaultContextMenu(timeSpinner);
+            
             timeSpinner.setPreferredSize(new Dimension(250, 25));
             JLabel documentLabel = new JLabel("เอกสารรับ-จ่าย");
             final JTextField documentTextField = new JTextField();
-            DefaultContextMenu.addDefaultContextMenu(documentTextField);
+            
             documentTextField.setPreferredSize(new Dimension(120, 25));
             JLabel pickerLabel = new JLabel("ผู้เบิก");
             final JTextField pickerTextField = new JTextField("");
-            DefaultContextMenu.addDefaultContextMenu(pickerTextField);
+            
             pickerTextField.setPreferredSize(new Dimension(120, 25));
             JButton submitBtn = new JButton("ยืนยัน");
             submitBtn.addActionListener(new ActionListener() {
@@ -328,12 +331,15 @@ public class DetailPanel extends JFrame {
   }
   
   private void save() {
-    String update_item = "UPDATE `items` SET `quantity`=" + this.selectedParcel.getQuantity() + " WHERE `itemID` = '" + this.temp_his.getItemID() + "'";
-    String command = "INSERT INTO `history` (`itemID`, `date`, `document`, `quantity`, `status`, `remaining`, `picker`, `note`) VALUES ('" + this.temp_his.getItemID() + "','" + this.temp_his.getDate() + "','" + this.temp_his.getDocument() + "'," + this.temp_his.getQuantity() + "," + this.temp_his.getStatus() + "," + this.temp_his.getRemaining() + ",'" + this.temp_his.getPicker() + "','" + this.temp_his.getNote() + "')";
-    System.out.println(command);
-    System.out.println(update_item);
-    this.c.execute(update_item);
-    this.c.execute(command);
+    //String update_item = "UPDATE `items` SET `quantity`=" + this.selectedParcel.getQuantity() + " WHERE `itemID` = '" + this.temp_his.getItemID() + "'";
+    //String command = "INSERT INTO `history` (`itemID`, `date`, `document`, `quantity`, `status`, `remaining`, `picker`, `note`) VALUES ('" + this.temp_his.getItemID() + "','" + this.temp_his.getDate() + "','" + this.temp_his.getDocument() + "'," + this.temp_his.getQuantity() + "," + this.temp_his.getStatus() + "," + this.temp_his.getRemaining() + ",'" + this.temp_his.getPicker() + "','" + this.temp_his.getNote() + "')";
+    //System.out.println(command);
+   // System.out.println(update_item);
+	ParcelOperator po = new ParcelOperator();
+    //this.c.execute(update_item);
+    //this.c.execute(command);
+	this.so.updateHistory(Long.parseLong(this.temp_his.getItemID()), this.selectedParcel);
+	po.updateParcel(this.selectedParcel);
     this.temp_his = null;
     this.temp_quantity = 0;
   }
