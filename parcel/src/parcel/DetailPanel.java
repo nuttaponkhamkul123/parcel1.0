@@ -59,10 +59,12 @@ public class DetailPanel extends JFrame {
   
   private final Font ANGSANA25_BOLD = new Font("Angsana New", 1, 25);
   
+  private ParcelOperator po;
   
   public DetailPanel(Parcel parcel) {
     UIManager.put("OptionPane.messageFont", new Font("Angsana New", 0, 20));
     so = new StockOperator();
+    po = new ParcelOperator();
     this.tfPanel = new JPanel();
     this.tbPanel = new JPanel();
     so.fetchHistory(parcel.getId());
@@ -331,15 +333,11 @@ public class DetailPanel extends JFrame {
   }
   
   private void save() {
-    //String update_item = "UPDATE `items` SET `quantity`=" + this.selectedParcel.getQuantity() + " WHERE `itemID` = '" + this.temp_his.getItemID() + "'";
-    //String command = "INSERT INTO `history` (`itemID`, `date`, `document`, `quantity`, `status`, `remaining`, `picker`, `note`) VALUES ('" + this.temp_his.getItemID() + "','" + this.temp_his.getDate() + "','" + this.temp_his.getDocument() + "'," + this.temp_his.getQuantity() + "," + this.temp_his.getStatus() + "," + this.temp_his.getRemaining() + ",'" + this.temp_his.getPicker() + "','" + this.temp_his.getNote() + "')";
-    //System.out.println(command);
-   // System.out.println(update_item);
-	ParcelOperator po = new ParcelOperator();
-    //this.c.execute(update_item);
-    //this.c.execute(command);
+	
 	this.so.updateHistory(Long.parseLong(this.temp_his.getItemID()), this.selectedParcel);
-	po.updateParcel(this.selectedParcel);
+	
+	this.po.updateParcel(this.selectedParcel);
+	this.po.saveParcel();
     this.temp_his = null;
     this.temp_quantity = 0;
   }

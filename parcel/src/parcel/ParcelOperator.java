@@ -31,7 +31,7 @@ public class ParcelOperator {
 	  
 	  public void saveParcel(){
 		  try {
-			  
+			  System.out.println("Saving Parcel");
 			  FileOutputStream fos = new FileOutputStream("./parcel.dat");
 			  ObjectOutputStream oos = new ObjectOutputStream(fos);
 			  oos.writeObject(parcels);
@@ -45,16 +45,18 @@ public class ParcelOperator {
 	  public void updateParcel(Parcel p) {
 		  System.out.println("---------Updating Parcel-----------");
 		  System.out.println("p : " + p.getId());
-		  for(Parcel pc : parcels) {
-			  System.out.println("pc : " + pc.getId());
-			  if(pc.getId() == p.getId()) {
-				  System.out.println("yoooo");
-				  pc = p;
-				  System.out.println("Remaining : "  + parcels.get(parcels.indexOf(pc)).getQuantity());
+		  System.out.println("Parcel Array Size : " + parcels.size());
+		  
+		  for(int i = 0 ; i < parcels.size(); i++) {
+			  //System.out.println(p.getId().getClass().getSimpleName() + ":::" + parcels.get(i).getId().getClass().getSimpleName());
+			  if(parcels.get(i).getId().equals(p.getId())) {
+				 
+				  parcels.get(i).removeParcel((int) (parcels.get(i).getQuantity() - p.getQuantity()));
 			  }
 		  }
+
 		  
-		  saveParcel();
+		  
 	  }
 
 	  public ArrayList<Parcel> getItems() {

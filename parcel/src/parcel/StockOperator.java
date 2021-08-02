@@ -56,10 +56,11 @@ public class StockOperator implements Serializable{
 	  public void updateHistory(Long id,Parcel parcel) {
 		  Parcel temp = null;
 		  for(Parcel h : this.parcels) {
-			  if(h.getId() == id.toString()) {
+			  if(h.getId().equals(id.toString())) {
+				  System.out.println("update history");
 				  h = parcel;
 				  temp = h;
-				  break;
+				  
 			  }
 		  }
 		  saveHistory();

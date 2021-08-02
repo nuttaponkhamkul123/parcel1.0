@@ -68,6 +68,9 @@ public class Parcel implements Serializable{
   public String getPattern() {
     return this.pattern;
   }
+  public void setQuantity(Long amount) {
+	  this.quantity = amount;
+  }
   
   public void setPattern(String pattern) {
     this.pattern = pattern;
