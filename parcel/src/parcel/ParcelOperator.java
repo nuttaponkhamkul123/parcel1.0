@@ -48,9 +48,7 @@ public class ParcelOperator {
 		  System.out.println("Parcel Array Size : " + parcels.size());
 		  
 		  for(int i = 0 ; i < parcels.size(); i++) {
-			  //System.out.println(p.getId().getClass().getSimpleName() + ":::" + parcels.get(i).getId().getClass().getSimpleName());
 			  if(parcels.get(i).getId().equals(p.getId())) {
-				 
 				  parcels.get(i).removeParcel((int) (parcels.get(i).getQuantity() - p.getQuantity()));
 			  }
 		  }
