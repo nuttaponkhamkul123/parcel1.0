@@ -64,6 +64,8 @@ public class StockOperator implements Serializable{
 			  }
 		  }
 		  saveHistory();
+		  
+		  
 	  }
 	  public void removeHistory(Long id) {
 		   history.remove(id);
