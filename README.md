@@ -1,20 +1,40 @@
-# Parcel 1.1
-This my personal project called parcel management that I made for my dad
 
-# Introduction 
- How's my project origin?
-  - my dad told me that he want me to make some parcel management because he doesn't want to manage in paper 
-  - I want to make some useful project for someone.
-  - I want to improve my java skill using any api or gui layout.
-  - I want to learning about any new things that I want to learn.
- 
- Feature
-  - Add and Remove some parcel.
-  - Increase and Decrease the amount of each parcel.
-  - Can Export to Excel file as a report.
-  - I forgot because I wrote this readme in 2021 but my project was created in 2019.
+# Parcel Manager 📦
 
-# Requirements
- - Java SE 15
- - (Removed) Any server emulator that supported mysql and phpmyadmin(optional)
- - Any Java IDE (I prefer use Eclipse)
+A simple Java desktop application designed for basic parcel inventory management. This project was created to help my father digitize his paper-based tracking system.
+
+-----
+
+## ✨ Key Features
+
+  * **Add & Remove Parcels:** Easily register new parcels or delete old ones from the inventory.
+  * **Update Stock:** Quickly increase or decrease the quantity of each parcel.
+  * **Export Reports:** Generate and export the current parcel list as an `.xlsx` file for reporting and record-keeping.
+
+-----
+
+## 🛠️ Built With
+
+This project was a great opportunity to improve my skills and learn new things. The primary technology used is:
+
+  * **Java**
+
+-----
+
+## 🚀 Getting Started
+
+To get a local copy up and running, you will need the following:
+
+### **Prerequisites**
+
+  * **Java SE Development Kit (JDK) 15** or newer.
+  * A Java IDE such as **Eclipse**, **IntelliJ IDEA**, or **VS Code**.
+
+### **Installation**
+
+1.  Clone the repository to your local machine:
+    ```sh
+    git clone https://github.com/your_username/your_repository.git
+    ```
+2.  Open the project folder in your preferred Java IDE.
+3.  Locate and run the main application file.
